@@ -1,0 +1,29 @@
+# Normalise line endings.
+#
+# Without this, the same file can be stored with CRLF by a Windows contributor
+# and LF by a macOS/Linux one, which shows up as a whole-file diff on every
+# commit. `text=auto eol=lf` tells Git to store LF in the repository and check
+# LF out everywhere, matching the `end_of_line = lf` rule in .editorconfig.
+* text=auto eol=lf
+
+# Shell scripts must keep LF or they will not run on Linux.
+*.sh text eol=lf
+
+# Windows-only scripts keep CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Never touch binary files.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.pdf  binary
+*.zip  binary
+*.woff  binary
+*.woff2 binary
+
+# Keep generated lockfiles out of diff noise in pull requests, but still track
+# them (they are essential for reproducible installs).
+package-lock.json -diff
